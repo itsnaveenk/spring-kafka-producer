@@ -1,13 +1,17 @@
 package com.itsnaveenk.springkafkaproducer.controller;
 
+import com.itsnaveenk.springkafkaproducer.model.Notification;
+import com.itsnaveenk.springkafkaproducer.service.KafkaProducerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/v1")
+@RestController
+@RequestMapping("/api/v1")
 public class WebController {
+
+    @Autowired
+    KafkaProducerService kafkaProducerService;
 
     @GetMapping("/")
     public String check() {
@@ -15,8 +19,15 @@ public class WebController {
         return "Test Success";
     }
 
+
     @PostMapping("/send")
-    public ResponseEntity<String> send(@ResponseBody ) {
+    public ResponseEntity<?> send(@RequestBody Notification notification) {
+        System.out.println(notification.getMessage() + "received in system");
+        try {
+            kafkaProducerService.sendMessage(notification);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("service not working");
+        }
         return ResponseEntity.ok("Message sent successfully");
     }
 }
