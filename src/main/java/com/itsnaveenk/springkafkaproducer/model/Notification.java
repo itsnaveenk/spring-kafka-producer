@@ -41,4 +41,12 @@ public class Notification {
         this.recipient_id = recipient_id;
     }
 
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "user_id=" + user_id +
+                ", message='" + message + '\'' +
+                ", recipient_id=" + recipient_id +
+                '}';
+    }
 }
