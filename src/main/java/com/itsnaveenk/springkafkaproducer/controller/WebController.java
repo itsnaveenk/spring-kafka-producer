@@ -3,6 +3,7 @@ package com.itsnaveenk.springkafkaproducer.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/v1")
@@ -15,7 +16,7 @@ public class WebController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> send() {
+    public ResponseEntity<String> send(@ResponseBody ) {
         return ResponseEntity.ok("Message sent successfully");
     }
 }
