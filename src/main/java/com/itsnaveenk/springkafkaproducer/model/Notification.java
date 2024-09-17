@@ -14,6 +14,14 @@ public class Notification {
     @NotNull
     int recipient_id;
 
+    public Notification() {
+    }
+
+    public Notification(int user_id, String message, int recipient_id) {
+        this.user_id = user_id;
+        this.message = message;
+        this.recipient_id = recipient_id;
+    }
 
     @NotNull
     public int getUser_id() {
